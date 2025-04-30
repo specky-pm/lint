@@ -1,0 +1,46 @@
+{
+  "name": "test-component",
+  "version": "1.0.0",
+  "description": "A test component for Specky",
+  "author": {
+    "name": "Test Author",
+    "email": "author@example.com",
+    "url": "https://example.com/author"
+  },
+  "contributors": [
+    {
+      "name": "Contributor 1",
+      "email": "contributor1@example.com"
+    },
+    "Contributor 2"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "test",
+    "component",
+    "specky"
+  ],
+  "dependencies": {
+    "dependency1": "^1.0.0",
+    "dependency2": "^2.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/example/test-component"
+  },
+  "homepage": "https://example.com/test-component",
+  "bugs": {
+    "url": "https://github.com/example/test-component/issues",
+    "email": "bugs@example.com"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public",
+    "tag": "latest"
+  }
+}

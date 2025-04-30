@@ -1,0 +1,39 @@
+{
+  "entities": [
+    {
+      "name": "DuplicateEntity",
+      "attributes": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Unique identifier"
+        }
+      ]
+    },
+    {
+      "name": "DuplicateEntity",
+      "attributes": [
+        {
+          "name": "name",
+          "type": "string",
+          "description": "Entity name"
+        }
+      ]
+    },
+    {
+      "name": "EntityWithDuplicateAttributes",
+      "attributes": [
+        {
+          "name": "duplicate",
+          "type": "string",
+          "description": "First duplicate attribute"
+        },
+        {
+          "name": "duplicate",
+          "type": "number",
+          "description": "Second duplicate attribute"
+        }
+      ]
+    }
+  ]
+}

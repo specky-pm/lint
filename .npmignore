@@ -1,0 +1,28 @@
+# Ignore development and test directories
+test/
+docs/
+man/
+
+# Ignore build artifacts
+dist/
+
+# Ignore configuration files
+.eslintrc.js
+.babelrc.js
+jest.config.js
+tsconfig.json
+
+# Ignore editor and system files
+.vscode/
+.idea/
+.DS_Store
+
+# Ignore development dependencies
+node_modules/
+
+# Ignore source files (if building to dist)
+src/
+
+# Ignore other files
+package-lock.json
+npm-debug.log

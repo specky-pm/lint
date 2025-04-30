@@ -1,0 +1,10 @@
+{
+  "name": "syntax-error-component",
+  "version": "1.0.0",
+  "description": "Component with syntax error",
+  "author": "Test Author",
+  "license": "MIT",
+  "dependencies": {
+    "dependency1": "^1.0.0",
+    "dependency2": "^2.0.0"
+// Missing closing brace

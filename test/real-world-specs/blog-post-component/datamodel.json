@@ -1,0 +1,220 @@
+{
+  "entities": [
+    {
+      "name": "Post",
+      "attributes": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Unique identifier for the post",
+          "required": true,
+          "unique": true
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "description": "Title of the blog post",
+          "required": true
+        },
+        {
+          "name": "content",
+          "type": "string",
+          "description": "Main content of the blog post in markdown format",
+          "required": true
+        },
+        {
+          "name": "excerpt",
+          "type": "string",
+          "description": "Short summary of the post for previews",
+          "required": false
+        },
+        {
+          "name": "authorId",
+          "type": "string",
+          "description": "ID of the user who authored the post",
+          "required": true
+        },
+        {
+          "name": "authorName",
+          "type": "string",
+          "description": "Display name of the author",
+          "required": true
+        },
+        {
+          "name": "publishedDate",
+          "type": "date",
+          "description": "Date when the post was published",
+          "required": true
+        },
+        {
+          "name": "lastModifiedDate",
+          "type": "date",
+          "description": "Date when the post was last modified",
+          "required": true
+        },
+        {
+          "name": "featuredImageUrl",
+          "type": "string",
+          "description": "URL to the featured image for the post",
+          "required": false
+        },
+        {
+          "name": "tags",
+          "type": "array",
+          "description": "Array of tags associated with the post",
+          "required": false
+        },
+        {
+          "name": "categories",
+          "type": "array",
+          "description": "Array of categories the post belongs to",
+          "required": false
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "description": "Publication status (draft, published, archived)",
+          "required": true,
+          "default": "draft"
+        },
+        {
+          "name": "viewCount",
+          "type": "number",
+          "description": "Number of times the post has been viewed",
+          "required": true,
+          "default": 0
+        },
+        {
+          "name": "likeCount",
+          "type": "number",
+          "description": "Number of likes the post has received",
+          "required": true,
+          "default": 0
+        },
+        {
+          "name": "commentCount",
+          "type": "number",
+          "description": "Number of comments on the post",
+          "required": true,
+          "default": 0
+        },
+        {
+          "name": "readingTimeMinutes",
+          "type": "number",
+          "description": "Estimated reading time in minutes",
+          "required": false
+        }
+      ],
+      "relationships": [
+        {
+          "name": "comments",
+          "type": "one-to-many",
+          "target": "Comment",
+          "inverse": "post"
+        }
+      ]
+    },
+    {
+      "name": "Comment",
+      "attributes": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Unique identifier for the comment",
+          "required": true,
+          "unique": true
+        },
+        {
+          "name": "content",
+          "type": "string",
+          "description": "Content of the comment",
+          "required": true
+        },
+        {
+          "name": "authorId",
+          "type": "string",
+          "description": "ID of the user who authored the comment",
+          "required": true
+        },
+        {
+          "name": "authorName",
+          "type": "string",
+          "description": "Display name of the comment author",
+          "required": true
+        },
+        {
+          "name": "authorAvatarUrl",
+          "type": "string",
+          "description": "URL to the avatar image of the comment author",
+          "required": false
+        },
+        {
+          "name": "createdDate",
+          "type": "date",
+          "description": "Date when the comment was created",
+          "required": true
+        },
+        {
+          "name": "lastModifiedDate",
+          "type": "date",
+          "description": "Date when the comment was last modified",
+          "required": true
+        },
+        {
+          "name": "parentCommentId",
+          "type": "string",
+          "description": "ID of the parent comment if this is a reply",
+          "required": false
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "description": "Status of the comment (pending, approved, rejected)",
+          "required": true,
+          "default": "pending"
+        },
+        {
+          "name": "likeCount",
+          "type": "number",
+          "description": "Number of likes the comment has received",
+          "required": true,
+          "default": 0
+        },
+        {
+          "name": "replyCount",
+          "type": "number",
+          "description": "Number of replies to this comment",
+          "required": true,
+          "default": 0
+        },
+        {
+          "name": "isEdited",
+          "type": "boolean",
+          "description": "Whether the comment has been edited",
+          "required": true,
+          "default": false
+        }
+      ],
+      "relationships": [
+        {
+          "name": "post",
+          "type": "many-to-one",
+          "target": "Post",
+          "inverse": "comments"
+        },
+        {
+          "name": "parentComment",
+          "type": "many-to-one",
+          "target": "Comment",
+          "inverse": "replies"
+        },
+        {
+          "name": "replies",
+          "type": "one-to-many",
+          "target": "Comment",
+          "inverse": "parentComment"
+        }
+      ]
+    }
+  ]
+}

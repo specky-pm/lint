@@ -1,0 +1,99 @@
+{
+  "entities": [
+    {
+      "name": "User",
+      "attributes": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Unique identifier for the user",
+          "required": true,
+          "unique": true
+        },
+        {
+          "name": "email",
+          "type": "string",
+          "description": "User's email address",
+          "required": true,
+          "unique": true
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Duplicate attribute name",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "User",
+      "attributes": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Duplicate entity name",
+          "required": true,
+          "unique": true
+        }
+      ]
+    },
+    {
+      "attributes": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Missing entity name",
+          "required": true,
+          "unique": true
+        }
+      ]
+    },
+    {
+      "name": "Profile"
+    },
+    {
+      "name": "Post",
+      "attributes": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Unique identifier for the post",
+          "required": true,
+          "unique": true
+        }
+      ],
+      "relationships": [
+        {
+          "name": "author",
+          "type": "many-to-one",
+          "target": "NonExistentEntity"
+        },
+        {
+          "name": "comments",
+          "type": "invalid-type",
+          "target": "Comment"
+        }
+      ]
+    },
+    {
+      "name": "Comment",
+      "attributes": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Unique identifier for the comment",
+          "required": true,
+          "unique": true
+        }
+      ],
+      "relationships": [
+        {
+          "name": "post",
+          "type": "many-to-one",
+          "target": "Post",
+          "inverse": "nonExistentInverse"
+        }
+      ]
+    }
+  ]
+}

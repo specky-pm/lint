@@ -1,0 +1,345 @@
+{
+  "entities": [
+    {
+      "name": "User",
+      "attributes": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Unique identifier for the user",
+          "required": true,
+          "unique": true,
+          "validation": {
+            "pattern": "^[a-zA-Z0-9-]+$"
+          }
+        },
+        {
+          "name": "email",
+          "type": "string",
+          "description": "User's email address",
+          "required": true,
+          "unique": true,
+          "validation": {
+            "email": true,
+            "minLength": 5,
+            "maxLength": 100
+          }
+        },
+        {
+          "name": "passwordHash",
+          "type": "string",
+          "description": "Hashed password",
+          "required": true
+        },
+        {
+          "name": "firstName",
+          "type": "string",
+          "description": "User's first name",
+          "required": true
+        },
+        {
+          "name": "lastName",
+          "type": "string",
+          "description": "User's last name",
+          "required": true
+        },
+        {
+          "name": "role",
+          "type": "string",
+          "description": "User's role (admin, user, etc.)",
+          "required": true,
+          "default": "user",
+          "validation": {
+            "pattern": "^(admin|user|moderator)$"
+          }
+        },
+        {
+          "name": "phoneNumber",
+          "type": "string",
+          "description": "User's phone number",
+          "required": false,
+          "validation": {
+            "telephone": true
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "name": "profiles",
+          "type": "one-to-many",
+          "target": "Profile",
+          "inverse": "user"
+        },
+        {
+          "name": "settings",
+          "type": "one-to-one",
+          "target": "UserSettings",
+          "inverse": "user"
+        },
+        {
+          "name": "groups",
+          "type": "many-to-many",
+          "target": "Group",
+          "inverse": "members"
+        }
+      ]
+    },
+    {
+      "name": "Profile",
+      "attributes": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Unique identifier for the profile",
+          "required": true,
+          "unique": true
+        },
+        {
+          "name": "bio",
+          "type": "string",
+          "description": "User's biography",
+          "validation": {
+            "maxLength": 500
+          }
+        },
+        {
+          "name": "avatarUrl",
+          "type": "string",
+          "description": "URL to the user's avatar image",
+          "validation": {
+            "pattern": "^https?://.*\\.(jpg|jpeg|png|gif)$"
+          }
+        },
+        {
+          "name": "age",
+          "type": "number",
+          "description": "User's age",
+          "validation": {
+            "minimum": 13,
+            "maximum": 120
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "name": "user",
+          "type": "many-to-one",
+          "target": "User",
+          "inverse": "profiles"
+        }
+      ]
+    },
+    {
+      "name": "UserSettings",
+      "attributes": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Unique identifier for user settings",
+          "required": true,
+          "unique": true
+        },
+        {
+          "name": "theme",
+          "type": "string",
+          "description": "User interface theme preference",
+          "default": "light",
+          "validation": {
+            "pattern": "^(light|dark|system)$"
+          }
+        },
+        {
+          "name": "notificationsEnabled",
+          "type": "boolean",
+          "description": "Whether notifications are enabled",
+          "default": true
+        }
+      ],
+      "relationships": [
+        {
+          "name": "user",
+          "type": "one-to-one",
+          "target": "User",
+          "inverse": "settings"
+        }
+      ]
+    },
+    {
+      "name": "Group",
+      "attributes": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Unique identifier for the group",
+          "required": true,
+          "unique": true
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "Group name",
+          "required": true,
+          "validation": {
+            "minLength": 2,
+            "maxLength": 50
+          }
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "description": "Group description"
+        }
+      ],
+      "relationships": [
+        {
+          "name": "members",
+          "type": "many-to-many",
+          "target": "User",
+          "inverse": "groups"
+        }
+      ]
+    },
+    {
+      "name": "Post",
+      "attributes": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Unique identifier for the post",
+          "required": true,
+          "unique": true
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "description": "Post title",
+          "required": true
+        },
+        {
+          "name": "content",
+          "type": "string",
+          "description": "Post content",
+          "required": true,
+          "validation": {
+            "minLength": 10,
+            "maxLength": 10000
+          }
+        },
+        {
+          "name": "createdAt",
+          "type": "date",
+          "description": "Date and time when the post was created",
+          "required": true
+        },
+        {
+          "name": "updatedAt",
+          "type": "date",
+          "description": "Date and time when the post was last updated",
+          "required": true
+        },
+        {
+          "name": "published",
+          "type": "boolean",
+          "description": "Whether the post is published",
+          "default": false
+        },
+        {
+          "name": "viewCount",
+          "type": "number",
+          "description": "Number of times the post has been viewed",
+          "default": 0,
+          "validation": {
+            "minimum": 0
+          }
+        },
+        {
+          "name": "tags",
+          "type": "array",
+          "description": "Tags associated with the post",
+          "default": []
+        },
+        {
+          "name": "slug",
+          "type": "string",
+          "description": "URL-friendly version of the title",
+          "required": true,
+          "unique": true,
+          "validation": {
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+            "minLength": 3,
+            "maxLength": 100
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "name": "author",
+          "type": "many-to-one",
+          "target": "User"
+        },
+        {
+          "name": "comments",
+          "type": "one-to-many",
+          "target": "Comment",
+          "inverse": "post"
+        }
+      ]
+    },
+    {
+      "name": "Comment",
+      "attributes": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Unique identifier for the comment",
+          "required": true,
+          "unique": true
+        },
+        {
+          "name": "content",
+          "type": "string",
+          "description": "Comment content",
+          "required": true,
+          "validation": {
+            "minLength": 1,
+            "maxLength": 1000
+          }
+        },
+        {
+          "name": "createdAt",
+          "type": "date",
+          "description": "Date and time when the comment was created",
+          "required": true
+        },
+        {
+          "name": "isApproved",
+          "type": "boolean",
+          "description": "Whether the comment has been approved by a moderator",
+          "default": false
+        },
+        {
+          "name": "rating",
+          "type": "number",
+          "description": "Rating given by the commenter",
+          "validation": {
+            "minimum": 1,
+            "maximum": 5
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "name": "author",
+          "type": "many-to-one",
+          "target": "User"
+        },
+        {
+          "name": "post",
+          "type": "many-to-one",
+          "target": "Post",
+          "inverse": "comments"
+        }
+      ]
+    }
+  ]
+}

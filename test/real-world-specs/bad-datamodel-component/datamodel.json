@@ -1,0 +1,21 @@
+{
+  "entities": [
+    {
+      "name": "Post",
+      "attributes": [
+        {
+          "name": "id",
+          "type": "string",
+          "description": "Unique identifier for the post",
+          "required": true,
+          "unique": true
+        },
+        {
+          "name": "title",
+          "description": "Title of the blog post",
+          "required": true
+        }
+      ]
+    }
+  ]
+}

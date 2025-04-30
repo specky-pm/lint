@@ -1,0 +1,21 @@
+{
+  "name": "blog-post-component",
+  "version": "1.0.9",
+  "description": "A reusable blog post component with commenting functionality",
+  "author": {
+    "name": "Test Author",
+    "email": "test@example.com",
+    "url": "https://example.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/example/blog-post-component"
+  },
+  "dependencies": {
+    "user-component": "^2.3.0",
+    "rich-text-editor-component": "^1.5.2",
+    "media-gallery-component": "^3.1.0",
+    "notification-component": "^1.2.1"
+  }
+}
